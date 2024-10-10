@@ -1,0 +1,8 @@
+﻿dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 7.0.16
+dotnet add package Microsoft.EntityFrameworkCore --version 7.0.16
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 7.0.16
+dotnet add package Microsoft.Extensions.Configuration --version 7.0.0
+dotnet add package Microsoft.Extensions.Configuration.Json --version 7.0.0
+
+
+dotnet ef dbcontext scaffold "Server=GIABAO\GIABAO;Database=FUNewsManagementFall2024;Uid=sa;Pwd=12345;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -o Models -c FUNewsManagementDbContext --force
