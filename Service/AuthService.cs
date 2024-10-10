@@ -49,7 +49,7 @@ namespace Service {
             if (account == null) {
                 return null;
             }
-            var key = "key123456789!@#$%^&*()_+";
+            var key = _config.GetSection("JWTSection:SecretKey").Value;
             var claims = new[] {
                 new Claim(ClaimTypes.Email, account.AccountEmail),
                 new Claim(ClaimTypes.Role, account.AccountRole.ToString()),
