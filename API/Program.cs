@@ -59,7 +59,7 @@ builder.Services.AddControllers().AddOData(options => {
 static IEdmModel GetEdmModel() {
     var odataBuilder = new ODataConventionModelBuilder();
 
-    var newSet = odataBuilder.EntitySet<NewsArticle>("Articles");
+    var newSet = odataBuilder.EntitySet<NewsArticle>("NewsArticle");
     newSet.EntityType.HasKey(a => a.NewsArticleId);
 
     return odataBuilder.GetEdmModel();

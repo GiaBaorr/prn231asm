@@ -5,7 +5,7 @@ namespace Service {
 
     public interface INewArticlesService {
 
-        public Task<List<NewsArticle>> GetAll();
+        public List<NewsArticle> GetAll();
     }
     
     public class NewArticlesService : INewArticlesService {
@@ -15,7 +15,7 @@ namespace Service {
             this.newsArticleRepo = newsArticleRepo;
         }
 
-        public Task<List<NewsArticle>> GetAll() {
+        public List<NewsArticle> GetAll() {
             return newsArticleRepo.GetAll();
         }
     }

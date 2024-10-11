@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Presentation {
     public interface INewsArticleRepo {
-        public Task<List<NewsArticle>> GetAll();
+        public List<NewsArticle> GetAll();
     }
 
     public class NewArticlesRepoRepository :INewsArticleRepo {
@@ -14,8 +14,8 @@ namespace Presentation {
             _context = context;
         }
 
-        public async Task<List<NewsArticle>> GetAll() {
-            return await _context.NewsArticles.ToListAsync();
+        public List<NewsArticle> GetAll() {
+            return _context.NewsArticles.ToList();
         }
 
 
