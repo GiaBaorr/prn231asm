@@ -24,8 +24,8 @@ namespace Service {
         }
 
         public async Task<string> Login(string username, string password) {
-            SystemAccount account =  FindAdminInJson(username, password);
-            
+            SystemAccount account = FindAdminInJson(username, password);
+
             account = account == null ? await _accountRepo.FindByEmailPassword(username, password) : account;
 
             return GenerateJwtToken(account);
@@ -57,8 +57,8 @@ namespace Service {
 
             var creds = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)), SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
-                issuer: null,
-                audience: null,
+                issuer: _config.GetSection("JWTSection:Issuer").Value,
+                audience: _config.GetSection("JWTSection:Audience").Value,
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: creds);

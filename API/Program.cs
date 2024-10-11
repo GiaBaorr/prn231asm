@@ -29,13 +29,13 @@ builder.Services.AddScoped<INewsArticleRepo, NewArticlesRepoRepository>();
 
 builder.Services.AddSwaggerGen(setup => {
     // Include 'SecurityScheme' to use JWT Authentication
-    var jwtScheme = new OpenApiSecurityScheme {
-        Name = "JWT",
-        Scheme = JwtBearerDefaults.AuthenticationScheme,
-        Type = SecuritySchemeType.Http,
-        In = ParameterLocation.Header,
+    var jwtSecurityScheme = new OpenApiSecurityScheme {
         BearerFormat = "JWT",
-        Description = "hehehe",
+        Name = "JWT Authentication",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = JwtBearerDefaults.AuthenticationScheme,
+        Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
 
         Reference = new OpenApiReference {
             Id = JwtBearerDefaults.AuthenticationScheme,
@@ -43,10 +43,10 @@ builder.Services.AddSwaggerGen(setup => {
         }
     };
 
-    setup.AddSecurityDefinition(jwtScheme.Reference.Id, jwtScheme);
+    setup.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
 
     setup.AddSecurityRequirement(new OpenApiSecurityRequirement {
-        { jwtScheme, Array.Empty<string>() }
+        { jwtSecurityScheme, Array.Empty<string>() }
     });
 
 });
@@ -68,10 +68,14 @@ static IEdmModel GetEdmModel() {
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => {
         options.TokenValidationParameters = new TokenValidationParameters {
+            ValidateIssuer = true,
+            ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JWTSection:SecretKey").Value)),
+            ValidIssuer = builder.Configuration.GetSection("JWTSection:Issuer").Value,
+            ValidAudience = builder.Configuration.GetSection("JWTSection:Audience").Value,
         };
     });
 

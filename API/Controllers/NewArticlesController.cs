@@ -16,7 +16,7 @@ namespace API.Controllers {
 
 
         [EnableQuery]
-        // [Authorize(Roles = "99")]
+        [Authorize(Roles = "99")]
         [HttpGet]
         public IActionResult GetAllNews() {
             var result = newArticlesService.GetAll();
