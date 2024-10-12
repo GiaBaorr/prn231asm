@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace Data.Models;
 
-public partial class NewsArticle
-{
+public partial class NewsArticle {
     public string NewsArticleId { get; set; } = null!;
 
     public string? NewsTitle { get; set; }

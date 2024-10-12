@@ -1,6 +1,6 @@
 ﻿namespace API.DTO {
     public class ArticlesDTO {
-        public string NewsArticleId { get; set; } = null!;
+        public string? NewsArticleId { get; set; } = null!;
 
         public string? NewsTitle { get; set; }
 
